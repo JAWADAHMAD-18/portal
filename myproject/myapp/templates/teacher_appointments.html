@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}My Appointments{% endblock %}
+
+{% block body %}
+<style>
+    .accepted-row {
+    background-color: #d4edda; /* light green background */
+    color: #155724; /* dark green text for contrast */
+}
+
+</style>
+<h2 class="mb-4">My Appointments</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Message</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for appointment in appointments %}
+        <tr class="{% if appointment.status == 'accepted' %}accepted-row{% endif %}">
+            <td>{{ appointment.student.get_full_name|default:appointment.student.username }}</td>
+            <td>{{ appointment.date }}</td>
+            <td>{{ appointment.time }}</td>
+            <td>{{ appointment.message }}</td>
+            <td>{{ appointment.status }}</td>
+            <td>
+                <form method="post" action="{% url 'accept_appointment' appointment.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Accept</button>
+                </form>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="text-center">You have no appointments.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

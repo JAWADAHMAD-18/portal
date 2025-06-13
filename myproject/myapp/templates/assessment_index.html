@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+{% block title %}Assessment | Careerguide{% endblock %}
+
+{% block link %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'assessment/css/styles.css' %}">
+<script src="{% static 'assessment/js/index.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+ {% csrf_token %} 
+ {% if messages %}
+  <div>
+    {% for message in messages %}
+      <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %} 
+ <div class="accordion">
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button id="accordion1button" class="accordion-button" type="button" data-bs-toggle="collapse"
+                data-bs-target="#accordion1">
+                General Information
+            </button>
+        </h2>
+        <div id="accordion1" class="accordion-collapse collapse show">
+            <div class="accordion-body p-5">
+
+                <div class="row">
+                    <label for="name" class="col-md-2 col-form-label col-form-label-lg">Full Name</label>
+                    <div class="col">
+                        <input type="text" class="form-control form-control-lg" id="name" name="name">
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <label for="age" class="col-md-2 col-form-label col-form-label-lg">Age</label>
+                    <div class="col">
+                        <input type="text" class="form-control form-control-lg" id="age" name="age">
+                    </div>
+                </div>
+
+                <br>
+
+                <fieldset class="row mb-3">
+                    <legend for="sex" class="col-md-2 col-form-label col-form-label-lg">Sex</legend>
+                    <div class="col-md-10">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sex" id="sexRadio1" value="M">
+                            <label class="form-check-label" for="sexRadio1">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sex" id="sexRadio2" value="F">
+                            <label class="form-check-label" for="sexRadio2">Female</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button id="accordion2button" class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#accordion2">
+                High School Marks
+            </button>
+        </h2>
+        <div id="accordion2" class="accordion-collapse collapse">
+            <div class="accordion-body p-5">
+
+                <fieldset class="row mb-3">
+                    <legend class="col-md-2 col-form-label col-form-label-lg">Stream</legend>
+                    <div class="col-md-10">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="stream" id="streamRadio1"
+                                value="Science">
+                            <label class="form-check-label" for="streamRadio1">Science</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="stream" id="streamRadio2"
+                                value="Commerce">
+                            <label class="form-check-label" for="streamRadio2">Commerce</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="stream" id="streamRadio3"
+                                value="Humanities">
+                            <label class="form-check-label" for="streamRadio3">Humanities</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <br>
+
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text">Subject 1</label>
+                        <input type="text" class="form-control" id="subject1_name" placeholder="Name"  name="subject1_name">
+                        <input type="text" class="form-control" id="subject1_marks" placeholder="Marks" name="subject1_marks">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text">Subject 2</label>
+                        <input type="text" class="form-control" id="subject2_name" placeholder="Name"  name="subject2_name">
+                        <input type="text" class="form-control" id="subject2_marks" placeholder="Marks" name="subject2_marks">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text">Subject 3</label>
+                        <input type="text" class="form-control" id="subject3_name" placeholder="Name"  name="subject3_name">
+                        <input type="text" class="form-control" id="subject3_marks" placeholder="Marks" name="subject3_marks">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text">Subject 4</label>
+                        <input type="text" class="form-control" id="subject4_name" placeholder="Name"  name="subject4_name">
+                        <input type="text" class="form-control" id="subject4_marks" placeholder="Marks" name="subject4_marks">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text">Subject 5</label>
+                        <input type="text" class="form-control" id="subject5_name" placeholder="Name"  name="subject5_name">
+                        <input type="text" class="form-control" id="subject5_marks" placeholder="Marks" name="subject5_marks">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="intrest">
+        <textarea name="intrest" id="intrest" style="width: 90%;height: 7rem; margin-top: 3rem;"></textarea>
+    </div>
+    <div class="guidance">
+        <label for="guidance" class="form-label mt-3">guidance / Teacher point of view</label>
+    
+        {% if user.is_teacher or user.is_superuser %}
+            <!-- Editable for teacher/admin -->
+            <textarea name="intrest" id="intrest" style="width: 90%; height: 7rem;" class="form-control">{{ form.guodance.value }}</textarea>
+        {% else %}
+            <!-- Read-only for student -->
+            <textarea id="guidance" readonly style="width: 90%; height: 7rem;" class="form-control">{{ form.guidance.value }}</textarea>
+        {% endif %}
+    </div>
+    
+
+   
+</div> 
+<input type="submit" value="submit" class="btn btn-success mt-5 float-end" id="Btn">
+</form>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}All Feedback{% endblock %}
+{% block body %}
+<h2>Student Feedback</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Teacher</th>
+            <th>Rating</th>
+            <th>Comments</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for f in feedbacks %}
+        <tr>
+            <td>{{ f.student.username }}</td>
+            <td>{{ f.teacher.name }}</td>
+            <td>{{ f.rating }}/5</td>
+            <td>{{ f.comments }}</td>
+            <td>{{ f.submitted_at|date:"d M Y H:i" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

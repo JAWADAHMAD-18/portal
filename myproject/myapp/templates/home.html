@@ -1,0 +1,168 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jawad Institute</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .navbar .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: larger;
+            font-weight: 700;
+            padding: 2rem;
+        }
+
+        .navbar .nav-links a:hover {
+            text-decoration: underline;
+            color: rgb(81, 240, 240);
+        }
+
+        .intro {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 3rem 2rem;
+        }
+
+        .intro .text {
+            flex: 1;
+            min-width: 250px;
+            margin-right: 2rem;
+            font-size: medium;
+            font-weight: 500;
+        }
+
+        .intro h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .highlight {
+            background-color: #e6f0ff;
+            border-left: 4px solid #b4d1fa;
+            padding: 0.5rem;
+            display: block;
+            margin: 1rem 0;
+            font-weight: 500;
+        }
+
+
+        .intro .image {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .intro .image img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .footer .social-icons {
+            margin-top: 0.5rem;
+        }
+
+        .footer.social-icons a:hover {
+            color: rgb(81, 240, 240);
+        }
+
+        .footer .social-icons a {
+            color: white;
+            margin: 0 0.5rem;
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Jawad Institute</div>
+        <ul class="nav-links">
+            <li><a href="#" onclick="alertLogin()">Dashboard</a></li>
+            <li><a href="{% url 'signup' %}">Signup</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="intro">
+        <div class="text">
+            <h1>Welcome to Jawad Institute</h1>
+            <p>At Jawad Institute, we are committed to shaping the future of students through guidance and skill-based
+                learning.
+                Our platform connects students with experienced mentors to unlock career possibilities.
+                <span class="highlight">It is a dedicated student guidance portal where you can interact with different
+                    teachers who will guide you based on your academic performance and interests in high-demand
+                    fields.</span>
+                We believe in a strong foundation, quality education, and lifelong support.
+            </p>
+        </div>
+        <div class="image">
+            <img src="{% static 'christina-wocintechchat-com-Q80LYxv_Tbs-unsplash.jpg' %}" alt="Institute Image">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <p>&copy; 2025 Jawad Institute. All rights reserved.</p>
+    </footer>
+    <script>
+        function alertLogin() {
+            alert("Please login first to access the dashboard")
+
+        }
+    </script>
+</body>
+
+</html>

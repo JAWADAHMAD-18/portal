@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block body %}
+    <h2>Submitted Career Reports</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Age</th>
+                <th>Stream</th>
+                <th>Review</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for report in reports %}
+                <tr>
+                    <td>{{ report.name }}</td>
+                    <td>{{ report.age }}</td>
+                    <td>{{ report.stream }}</td>
+                    <td>
+                        <a href="{% url 'review_career_report' report.id %}" class="btn btn-primary btn-sm">
+                            Review Report
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{%endblock%}

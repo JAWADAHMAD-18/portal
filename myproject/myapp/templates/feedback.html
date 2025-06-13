@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Give Feedback{% endblock %}
+
+{% block body %}
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<div class="text-center">
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+    <h2 class="mb-4">Feedback for {{ teacher.user.get_full_name }}</h2>
+
+    <!-- ✅ Teacher Info Card -->
+    <div class="card mx-auto" style="max-width: 400px;">
+        {% if teacher.profile_pic %}
+            <img src="{{ teacher.profile_pic.url }}" class="card-img-top" alt="{{ teacher.user.get_full_name }}">
+        {% else %}
+            <img src="{% static 'default-teacher.jpg' %}" class="card-img-top" alt="No photo">
+        {% endif %}
+        <div class="card-body">
+            <h5 class="card-title">{{ teacher.user.get_full_name }}</h5>
+            <p class="card-text">
+                <strong>Specialization:</strong> {{ teacher.specification }}<br>
+                <strong>Qualification:</strong> {{ teacher.qualification }}
+            </p>
+        </div>
+    </div>
+
+    <!-- ⭐️ Rating + Comments Form -->
+    <form method="post" class="mt-4">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="rating" class="form-label">Your Rating:</label>
+            <div class="star-rating d-flex justify-content-center">
+                {% for i in "54321" %}
+                <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}" required>
+                <label for="star{{ i }}" title="{{ i }} stars">★</label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="comments" class="form-label">Your Comments:</label>
+            <textarea name="comments" class="form-control" rows="4" placeholder="Write your feedback..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success">Submit Feedback</button>
+    </form>
+</div>
+
+<style>
+    .star-rating {
+        direction: rtl;
+        font-size: 2rem;
+    }
+
+    .star-rating input[type="radio"] {
+        display: none;
+    }
+
+    .star-rating label {
+        color: #ccc;
+        cursor: pointer;
+    }
+
+    .star-rating input[type="radio"]:checked ~ label {
+        color: gold;
+    }
+
+    .star-rating label:hover,
+    .star-rating label:hover ~ label {
+        color: gold;
+    }
+</style>
+{% endblock %}

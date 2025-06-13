@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Appointment Confirmed{% endblock %}
+
+{% block body %}
+<div class="text-center">
+    <h2 class="text-success">Thank You!</h2>
+    <p>Your appointment has been successfully booked.</p>
+    <p><strong>Teacher:</strong> {{ appointment.teacher.user.first_name|default:appointment.teacher.user.username }}</p>
+    <p><strong>Date:</strong> {{ appointment.date }}</p>
+    <p><strong>Time:</strong> {{ appointment.time }}</p>
+    <p>We look forward to seeing you!</p>
+
+    <a href="{% url 'teacher_list' %}" class="btn btn-primary mt-3">Back to Teachers</a>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block body %}
+    <h2>Career Report Review</h2>
+
+    <p><strong>Name:</strong> {{ report.name }}</p>
+    <p><strong>Age:</strong> {{ report.age }}</p>
+    <p><strong>Sex:</strong> {{ report.get_sex_display }}</p>
+    <p><strong>Stream:</strong> {{ report.stream }}</p>
+
+    <h4>Subjects & Marks</h4>
+   <ul>
+    {% for name, marks in subject_data %}
+    <li>{{ name }}: {{ marks|default:"N/A" }}</li>
+    {% endfor %}
+</ul>
+
+
+
+    <p><strong>Interest:</strong> {{ report.intrest }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="guidance" class="form-label">Your Guidance / Comments:</label>
+            <textarea id="guidance" name="guidance" class="form-control" rows="4">{{ report.guidance }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Guidance</button>
+    </form>
+{%endblock%}

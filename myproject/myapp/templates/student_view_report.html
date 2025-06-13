@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block body %}
+    <h2>My Career Report</h2>
+
+    {% if report %}
+        <!-- 🔔 Guidance message at the top -->
+        <div class="alert alert-info mt-3">
+            <strong>📌 Teacher's Guidance:</strong><br>
+            {% if report.guidance %}
+                {{ report.guidance }}
+            {% else %}
+                No guidance submitted yet. Please wait for teacher feedback.
+            {% endif %}
+        </div>
+
+        <hr>
+
+        <p><strong>Name:</strong> {{ report.name }}</p>
+        <p><strong>Age:</strong> {{ report.age }}</p>
+        <p><strong>Sex:</strong> {{ report.get_sex_display }}</p>
+        <p><strong>Stream:</strong> {{ report.stream }}</p>
+
+        <h4>Subjects:</h4>
+        <ul>
+            <li>{{ report.subject1_name }}: {{ report.subject1_marks }}</li>
+            <li>{{ report.subject2_name }}: {{ report.subject2_marks }}</li>
+            <li>{{ report.subject3_name }}: {{ report.subject3_marks }}</li>
+            <li>{{ report.subject4_name }}: {{ report.subject4_marks }}</li>
+            <li>{{ report.subject5_name }}: {{ report.subject5_marks }}</li>
+        </ul>
+
+        <p><strong>Interest:</strong> {{ report.intrest }}</p>
+
+    {% else %}
+        <div class="alert alert-warning mt-3">
+            You have not submitted your career report yet.
+        </div>
+    {% endif %}
+
+{% endblock %}

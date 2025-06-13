@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard | CareerGuide{% endblock %}
+
+{% block body %}
+<div class="text-center">
+    <h1 class="display-4 text-primary">Welcome to Jawad Institute</h1>
+    <p class="lead mt-3">Empowering students and guiding them to a brighter future through personalized career
+        counseling and expert guidance.</p>
+    <hr class="my-4">
+
+    <h3>Hello, {{ request.user.first_name|default:request.user.username }} 👋</h3>
+
+{% if accepted_appointments and accepted_appointments|length > 0 %}
+    {% for appointment in accepted_appointments %}
+        <div class="alert alert-success mt-3">
+            🎉 Your appointment with <strong>{{ appointment.teacher.user.first_name }}</strong>
+            on <strong>{{ appointment.date }}</strong> at <strong>{{ appointment.time }}</strong> has been <strong>accepted</strong>!
+        </div>
+    {% endfor %}
+{% else %}
+    <p class="text-muted mt-3">You have no accepted appointments yet.</p>
+{% endif %}
+
+    {% if request.user.is_superuser or request.user.teacher %}
+    <p class="mt-3">You can now review career reports and help students with valuable guidance.</p>
+    <a href="{% url 'career_report_list' %}" class="btn btn-outline-primary mt-3">View Career Reports</a>
+    {% else %}
+  
+
+
+    <p class="mt-3">Start your journey by submitting your career report or reviewing feedback from your teacher.</p>
+    <a href="{% url 'ass_index' %}" class="btn btn-outline-success mt-3">Submit Career Report</a>
+    <a href="{% url 'my_career_report' %}" class="btn btn-outline-info mt-3 ms-2">View Feedback</a>
+    {% endif %}
+</div>
+{% endblock %}

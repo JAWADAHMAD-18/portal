@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<body class="bg-light">
+    <div class="container mt-5">
+        <h2 class="mb-4">Book Appointment with {{ teacher.name }}</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="date" class="form-label">Select Date:</label>
+                <input type="date" id="date" name="date" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="time" class="form-label">Select Time:</label>
+                <input type="time" id="time" name="time" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Purpose / Message:</label>
+                <textarea id="message" name="message" class="form-control" rows="3"
+                    placeholder="e.g., I need guidance for choosing between CS or SE." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Book Appointment</button>
+        </form>
+    </div>
+{%endblock%}
